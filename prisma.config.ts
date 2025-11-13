@@ -1,12 +1,16 @@
-import { defineConfig, env } from "prisma/config";
+import { defineConfig } from 'prisma/config';
+
+// Use process.env directly to avoid requiring DATABASE_URL for commands that don't need it
+const databaseUrl =
+  process.env.DATABASE_URL || 'postgresql://localhost:5432/db';
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
+  schema: 'prisma/schema.prisma',
   migrations: {
-    path: "prisma/migrations",
+    path: 'prisma/migrations',
   },
-  engine: "classic",
+  engine: 'classic',
   datasource: {
-    url: env("DATABASE_URL"),
+    url: databaseUrl,
   },
 });
